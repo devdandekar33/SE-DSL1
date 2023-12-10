@@ -1,0 +1,16 @@
+l1=[9,8,7,6,5,4,3,2,1]
+def quicksort(l):
+    if len(l)<=1:
+        return l
+    else:
+        pivot=l.pop()
+        items_greater=[]
+        items_lesser=[]
+        for i in l:
+            if i>pivot:
+                items_greater.append(i)
+            else:
+                items_lesser.append(i)
+        return quicksort(items_lesser)+[pivot]+quicksort(items_greater)
+print(f"Quicksort: {quicksort(l1)}")
+    
