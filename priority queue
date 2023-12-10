@@ -6,28 +6,28 @@ class priority_queue{
     struct Node{
         int data;
         int priority;
-        bool operator<=(const Node& other) const{
+        bool operator<=(const Node& other) const{        //operator overloading
             return priority>=other.priority;
         }
     };
-    vector<Node> queue;
+    vector<Node> queue;        //queue vector is used to store
     public:
     void enqueue(int data, int priority){
-        Node newnode{data,priority};
+        Node newnode{data,priority};         //new Node object with name newnode and arguments
         int i=0;
         while(i<queue.size() && newnode<=queue[i]){
             i++;
         }
-        queue.insert(queue.begin()+i,newnode);
+        queue.insert(queue.begin()+i,newnode);// insert take two parameters location and data
     }
     
     void dequeue(){
         if(!queue.empty()){
-            queue.erase(queue.end()-1);//deletes last element
+            queue.erase(queue.end()-1);//deletes last element        //erase function takes location 
         }
     }
     void display(){
-        for(const auto& Node :queue){
+        for(const auto& Node :queue){        //auto take datatype automatically and Node is loop variable part of queue & provides reference to actual object and const helps to keep data constant
             cout<<"Data : "<<Node.data<<" Priority : "<<Node.priority<<endl;
         }
     }
