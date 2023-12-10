@@ -1,0 +1,33 @@
+students=[41,33,56,71,92,100]
+def linear_search(list1,key):
+    for i in range(0,len(list1)):
+        if list1[i]==key:
+            return i
+    
+    return -1
+    
+def sentinal_search(list1,key):
+    if list[-1]==key:
+        return len(list)-1
+    else:
+        list1[-1]=key
+        i=0
+        while(list1[i]!=key):
+            i+=1
+        
+        if i!=len(list1)-1:
+            return i
+        else:
+            return -2
+    
+key=int(input("Enter the element :"))
+switch=int(input("Enter 1 for linear search , 2 for sentinal search and 3 for exit :"))
+if switch==1:
+    print(f"the number {key} is found at index {linear_search(students,key)} and at position {linear_search(students,key)+1}")
+elif switch==2:
+    print(f"the number {key} is found at index {sentinal_search(students,key)} and at position {sentinal_search(students,key)+1}")
+else:
+    print("exit")
+
+    
+        
