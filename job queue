@@ -1,0 +1,79 @@
+#include<iostream>
+using namespace std;
+class queue{
+    private:
+    int size;
+    int *arr;
+    int front, rear;
+    public:
+    queue(){
+        size=12;
+        front=-1;
+        rear=-1;
+        arr=new int(size);
+    }
+    void addjob(int);
+    void deletejob();
+    void displayjob();
+    bool isfull();
+    bool isempty();
+};
+bool queue::isfull(){
+    if (rear==size-1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+bool queue::isempty(){
+    if(front==-1 && rear==-1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+void queue::addjob(int j){
+    if(isempty()){
+        front++;
+        rear++;
+        arr[rear]=j;
+        cout<<"job added "<<endl;
+    }
+    else if(!isfull()){
+        rear++;
+        arr[rear]=j;
+        cout<<"job added"<<endl;
+    }
+    
+    else{
+        cout<<"The queue is full, unable to add."<<endl;
+    }
+}
+void queue::deletejob(){
+    if(!isempty()){
+        rear--;
+    }
+    else{
+        cout<<"The queue is empty "<<endl;
+    }
+}
+void queue::displayjob(){
+    for(int i=front;i<=rear;i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    
+}
+int main(){
+    queue q1;
+    q1.addjob(2);
+    q1.addjob(4);
+    q1.addjob(3);
+    q1.displayjob();
+    q1.deletejob();
+    q1.displayjob();
+    return 0;
+
+}
