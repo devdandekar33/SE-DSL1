@@ -1,0 +1,45 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+class priority_queue{
+    private:
+    struct Node{
+        int data;
+        int priority;
+        bool operator<=(const Node& other) const{
+            return priority>=other.priority;
+        }
+    };
+    vector<Node> queue;
+    public:
+    void enqueue(int data, int priority){
+        Node newnode{data,priority};
+        int i=0;
+        while(i<queue.size() && newnode<=queue[i]){
+            i++;
+        }
+        queue.insert(queue.begin()+i,newnode);
+    }
+    
+    void dequeue(){
+        if(!queue.empty()){
+            queue.erase(queue.end()-1);//deletes last element
+        }
+    }
+    void display(){
+        for(const auto& Node :queue){
+            cout<<"Data : "<<Node.data<<" Priority : "<<Node.priority<<endl;
+        }
+    }
+};
+int main(){
+    priority_queue pq;
+    int data,priority;
+    pq.enqueue(22,3);
+    pq.enqueue(11,1);
+    pq.enqueue(99,2);
+    pq.display();
+    pq.dequeue();
+    pq.display();
+    return 0;
+}
