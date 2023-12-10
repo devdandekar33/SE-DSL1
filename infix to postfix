@@ -1,0 +1,95 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+class stack{
+    private:
+    char arr[50];
+    int top;
+    int size;
+    public:
+    stack(){
+        top=-1;
+        size=50;}
+        void push(char);
+        void pop();
+        void print();
+        bool isempty();
+        bool isfull();
+        int precedence(char);
+        void infixtopostfix(string str);
+};
+void stack::push(char x){
+    top++;
+    arr[top]=x;
+}
+void stack::pop(){
+    top--;
+}
+void stack::print(){
+    for(int i=0;i<size;i++){
+        cout<<arr[i]<<" ";
+    }
+}
+bool stack::isempty(){
+    if(top==-1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+bool stack::isfull(){
+    if(top==size-1){
+        return 1;}
+    else{
+        return 0;
+    }
+}
+int stack::precedence(char ch){
+    if(ch=='*'|| ch=='/'){
+        return 2;
+    }
+    else if (ch=='+'||ch=='-'){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+void stack::infixtopostfix(string str){
+    string ans;
+    for(int i=0;i<str.size();i++){
+        char ch=str[i];
+        if(ch>='a'&& ch<='z'||ch>='A'&&ch<='Z'){
+            ans+=ch;
+        }
+        else if(ch=='('){
+            push(ch);
+        }
+        else if(ch==')'){
+            while(arr[top]!='('){
+                ans+=arr[top];
+                pop();
+            }
+        }
+        else{
+            while(!isempty()&& precedence(ch)<=precedence(arr[top])){
+                ans+=arr[top];
+                pop();
+            }
+            push(ch);
+        }
+    }
+    while(!isempty()){
+        ans+=arr[top];
+        pop();
+    }
+    cout<<"the postfix equation is :"<<ans<<endl;
+}
+int main(){
+    stack s1;
+    string str;
+    cout<<"Enter the string :";
+    cin>>str;
+    s1.infixtopostfix(str);
+}
